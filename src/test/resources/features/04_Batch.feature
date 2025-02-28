@@ -20,7 +20,7 @@ Scenario: Validate "Title" in Batch Page
 	When Admin clicks "Batch" on the navigation bar
 	Then Admin should see the "LMS - Learning Management System" Title
 
-@TCB3 @batchPageValidation @smoke
+@TCB3 @batchPageValidation 
 Scenario: Validate "heading" in the Batch Page
 	When Admin clicks "Batch" on the navigation bar
 	Then Admin should see the "Manage Batch" Heading
@@ -167,7 +167,7 @@ Scenario: Validate editing description and No. of classes fields with invalid da
 	When Admin Updates any fields with invalid data and click save button
 	Then Admin should get a error message under the respective field
 
-@TCB26 @editBatchPageValidation @smoke
+@TCB26 @editBatchPageValidation 
 Scenario: validate save button in Batch details pop up
 	Given Admin is on the Batch Details Page
 	When Admin edit the valid data to all the mandatory fields and click save button 
@@ -253,7 +253,7 @@ Scenario: validate the first page link
 
 #------------------------------------Sorting--------------------------------------------#
 
-@TCB39 @sortingValidation @smoke
+@TCB39 @sortingValidation 
 Scenario Outline: Verify sorting of Manage Batch datatable in ascending order
   Given Admin is on the Batch page
   When Admin clicks on Arrow next to "<columnName>" of Batch module page for sort ascending
@@ -267,7 +267,7 @@ Scenario Outline: Verify sorting of Manage Batch datatable in ascending order
  |No Of Classes			|
  
 
- @TCB40 @sortingValidation @smoke
+ @TCB40 @sortingValidation 
  Scenario Outline: Verify sorting of Manage Batch datatable in descending order
   Given Admin is on the Batch page
   When Admin clicks on Arrow next to "<columnName>" of Batch module page for sort descending

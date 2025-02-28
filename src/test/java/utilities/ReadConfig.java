@@ -8,6 +8,7 @@ public class ReadConfig {
 
 	Properties pro;
 	private static String browserFromTestNG;
+	private static String headlessFromTestNG; 
 
 	public ReadConfig() {
 		File src = new File("./src/test/resources/Properties/Config.properties");
@@ -33,6 +34,7 @@ public class ReadConfig {
 		return browser;
 	}
 
+	
 	// get Login credentials
 	public String getUsername() {
 		String username = pro.getProperty("LMSUserName");
@@ -66,4 +68,19 @@ public class ReadConfig {
 		browserFromTestNG = browser;
 	}
 
+
+	// get headlessOption from config
+	public String getHeadlessfromTestNG() {
+		  return (headlessFromTestNG != null) ? headlessFromTestNG : "false";
+	}
+	
+	public void setHeadlessFromTestNG(String isHeadless) {
+		headlessFromTestNG = (isHeadless != null) ? isHeadless : "false";
+	    System.out.println(">>> Debug: ReadConfig - Stored Headless Value = " + headlessFromTestNG);
+}
+
+	public String getHeadlessOption() {
+		 return pro.getProperty("headless");
+	}
+	
 }

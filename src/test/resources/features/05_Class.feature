@@ -65,13 +65,13 @@ Feature: Class page validation
       | comments |  | notes      |  | recording |  | batchNameReqText       | classTopicReqText       | classDateReqText       | staffNameReqText       | noOfClassesReqText         |
       | Good     |  | java notes |  | goto link |  | Batch Name is required | Class Topic is required | Class Date is required | Staff Name is required | No. of Classes is required |
 
-  @TTLPH2-188 @smoke
+  @TTLPH2-188 
   Scenario: Check weekend dates are disabled in calendar
     Given clicks add new class under the class menu bar
     When Admin clicks date picker
     Then Admin should see weekends dates are disabled to select
 
-  @TTLPH2-100 @smoke
+  @TTLPH2-100 
   Scenario: Validate the sort icon of all the field in datatable
     Then Admin should see the Sort icon of all the field in the datatable.
 
@@ -89,7 +89,7 @@ Feature: Class page validation
     When Admin clicks Cancel Icon on class Details form
     Then Class Details popup window should be closed without saving
 
-  @TTLPH2-150 @smoke
+  @TTLPH2-150 
   Scenario Outline: Empty form submission 
     Given clicks add new class under the class menu bar
     When Admin clicks on save button without entering data
@@ -115,7 +115,7 @@ Feature: Class page validation
     When Admin clicks on the edit icon
     Then Admin should see class topic field is disabled
 
-  @TTLPH2-155 @smoke
+  @TTLPH2-155 
   Scenario Outline: Check if the optional fields are updated with valid data
     Given Admin is on the Edit Class Popup window
     When Update the optional fields with valid values "<comments>" "<notes>" "<recording>" and click save
@@ -125,7 +125,7 @@ Feature: Class page validation
       | comments |  | notes      |  | recording |
       | Good     |  | java notes |  | goto link |
 
-  @TTLPH2-157 @smoke
+  @TTLPH2-157 
   Scenario Outline: Check if the fields are updated with valid data
     Given Admin is on the Edit Class Popup window
     When Update the fields with valid data "<Class>" and click save
@@ -152,7 +152,7 @@ Feature: Class page validation
     When Admin clicks on the delete icon on class module page
     Then Admin able to delete by clicking No to confirmation pop up on Class module
 
-  @TTLPH2-160 @smoke
+  @TTLPH2-160
   Scenario: Admin validate delete by deleting multiple classes
     When Admin clicks on the multiple checkboxes on class module page
     And Admin clicks  on the left delete button on class module page
@@ -181,12 +181,12 @@ Feature: Class page validation
     When Admin clicks on Arrow next to Batch Name of Class module page for sort descend
     Then Admin See the Batch Name is sorted Descending order in Class module page
 
-  @TTLPH2-165 @smoke
+  @TTLPH2-165 
   Scenario: Verify sorting of Class Topic in Ascending order
     When Admin clicks on Arrow next to Class Topic of Class module page for sort
     Then Admin See the Class Topic is sorted Ascending order in Class module page
 
-  @TTLPH2-166 @smoke
+  @TTLPH2-166 
   Scenario: Verify sorting of Class Topic in Descending order
     When Admin clicks on Arrow next to Class Topic of Class module page for sort descend
     Then Admin See the Class Topic is sorted Descending order in Class module page

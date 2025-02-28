@@ -6,21 +6,21 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import hooks.TestContext;
 import utilities.ElementUtil;
 import utilities.ExcelReader;
 import utilities.Log;
@@ -29,7 +29,7 @@ import utilities.RunTimeData;
 
 public class ProgramPage extends CommonPage {
 
-	private WebDriver driver;
+	 private TestContext context;
 	private ElementUtil util;
 	ReadConfig readConfig;
 	Actions actions;
@@ -39,10 +39,9 @@ public class ProgramPage extends CommonPage {
 	Map<String, String> programData;
 	private static final Logger log = LogManager.getLogger(ProgramPage.class);
 
-	public ProgramPage(WebDriver driver) {
-		super(driver);
-		this.driver = driver;
-		PageFactory.initElements(driver, this);
+	public ProgramPage(TestContext context) {
+		super(context); // Pass WebDriver to parent class
+        this.context = context;
 		util = new ElementUtil(this.driver);
 		readConfig = new ReadConfig();
 		actions = new Actions(driver);
@@ -198,6 +197,7 @@ public class ProgramPage extends CommonPage {
 		util.doClick(saveButton);
 
 		RunTimeData.setData("programName", programName);
+	System.out.println("Program Name at run time in ProgramPage = " + programName);
 		RunTimeData.setData("programDesc", programDesc);
 		RunTimeData.setData("programstatus", status);
 
@@ -208,16 +208,15 @@ public class ProgramPage extends CommonPage {
 	}
 
 	public void editTheProgramAndClickSave(String testCase) throws InterruptedException {
-
-		String existingProgram = (String) RunTimeData.getData("programName");
-
+	    String existingProgram = (String) RunTimeData.getData("programName");
+	   
 		Log.logInfo("ProgramName at run time received in line 235 in ProgramPage = " + existingProgram);
-
-		while (existingProgram == null) {
-			Thread.sleep(1000);
-			// Then fetch data again
-			existingProgram = (String) RunTimeData.getData("programName");
-		}
+//
+//		while (existingProgram == null) {
+//			Thread.sleep(1000);
+//			// Then fetch data again
+//			existingProgram = existingProgramOpt.isPresent() ? (String) existingProgramOpt.get() : null;
+//		}
 
 		// Search for Program and Click Edit
 		searchUpdatedProgram(existingProgram);
@@ -263,8 +262,8 @@ public class ProgramPage extends CommonPage {
 
 	public void deleteTheProgramAndClickSave(String newProgram, String testCase) throws InterruptedException {
 
-		newProgram = (String) RunTimeData.getData("programNameEdit");
-		search(newProgram);
+		 newProgram = (String) RunTimeData.getData("programNameEdit");
+		  	search(newProgram);
 		clickDeleteProgramBtn(newProgram);
 		util.isElementDisplayed(deleteConfirmationPopUp);
 
@@ -294,7 +293,7 @@ public class ProgramPage extends CommonPage {
 
 	public void clickDeleteProgramBtn(String programName) {
 
-		programName = (String) RunTimeData.getData("programNameEdit");
+		programName = (String) RunTimeData.getData("programNameEdit"); 
 		log.info("Program to be deleted >>>" + programName);
 		WebElement deleteProgBtn = getProgramRowElement(programName).findElement(deleteButton);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", deleteProgBtn);
@@ -359,11 +358,41 @@ public class ProgramPage extends CommonPage {
 	}
 
 	public void search(String newProgram) {
+//		util.doClick(searchBox);
+//		searchBox.clear();
+//		
+//	    searchBox.sendKeys(newProgram);
 
-		searchBox.clear();
-		util.doClick(searchBox);
-		log.info("Program to search>>" + (String) RunTimeData.getData("programName"));
-		searchBox.sendKeys((String) RunTimeData.getData("programName"));
+		try {
+	        WebElement searchBoxElement = new WebDriverWait(driver, Duration.ofSeconds(10))
+	                .until(ExpectedConditions.visibilityOfElementLocated(searchBar));
+
+	        if (searchBoxElement != null) {
+	            searchBoxElement.clear();
+	            searchBoxElement.sendKeys(newProgram);
+
+	            // Wait for the search results to be displayed
+	            WebElement searchResultElement = new WebDriverWait(driver, Duration.ofSeconds(10))
+	                    .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table/tbody/tr/td[contains(text(),'" + newProgram + "')]")));
+
+	            if (searchResultElement == null) {
+	                throw new NoSuchElementException("No search results found for the program: " + newProgram);
+	            }
+	        } else {
+	            throw new NoSuchElementException("Search box element is not present on the page.");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw new RuntimeException("Failed to search for the program: " + newProgram, e);
+	    }
+	    
+//		 String programName = null;
+//		  Optional<Object> programNameOpt = RunTimeData.getData("programName");
+//		  
+//		   programName = programNameOpt.isPresent() ? (String) programNameOpt.get() : null;
+//		   System.out.println("Program to search>>" + programName);
+//		    log.info("Program to search>>" + programName);
+//		    searchBox.sendKeys(programName);
 
 	}
 	public void searchForEditDeleteProgram(String newProgram) {
@@ -375,15 +404,14 @@ public class ProgramPage extends CommonPage {
 
 	public void searchUpdatedProgram(String updatedProgram) {
 
-		searchBox.clear();
-		util.doClick(searchBox);
-		searchBox.sendKeys(updatedProgram);
+		search(updatedProgram);
+		//searchBox.sendKeys(updatedProgram);
 
 	}
 
 	public String verifySearchResultProgramName() {
-		String newProgram = (String) RunTimeData.getData("programName");
-
+		String newProgram = (String) RunTimeData.getData("programName"); 
+		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(
 				ExpectedConditions.presenceOfElementLocated(By.xpath("//td[contains(text(),'" + newProgram + "')]")));
@@ -399,9 +427,9 @@ public class ProgramPage extends CommonPage {
 	public Map<String, String> verifyUpdatedProgramDetails() {
 
 		String updatedProgram = (String) RunTimeData.getData("programNameEdit");
-		String updatedProgramDesc = (String) RunTimeData.getData("programDescEdit");
-		String updatedStatus = (String) RunTimeData.getData("programStatusEdit");
-
+	    String updatedProgramDesc = (String) RunTimeData.getData("programDescEdit");
+	    String updatedStatus = (String) RunTimeData.getData("programStatusEdit");
+	   
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions
 				.presenceOfElementLocated(By.xpath("//td[contains(text(),'" + updatedProgram + "')]")));

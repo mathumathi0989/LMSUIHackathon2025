@@ -48,32 +48,38 @@ public class LoginStepDef {
 	@Given("The browser is open")
 	public void the_browser_is_open() {
 		String browserName = readConfig.getbrowser();
-		driver = context.getDriverFactory().initialiseBrowser(browserName);
+		String isHeadless = readConfig.getHeadlessOption();
+		driver = context.getDriverFactory().initialiseBrowser(browserName, isHeadless);
+	    context.setDriver(driver); // Ensure the driver is set in the context
 	}
 
 	@Given("Admin gives the correct LMS portal URL")
 	public void admin_gives_the_correct_lms_portal_url() {
 
-		context.setDriver(driver);
-		context.getDriver().get(readConfig.getApplicationURL());
-
+	      if (driver == null) {
+	            driver = context.getDriverFactory().initialiseBrowser(readConfig.getbrowser(), readConfig.getHeadlessOption());
+	            context.setDriver(driver);
+	        }
+	        context.getDriver().get(readConfig.getApplicationURL());
 	}
 
+	
 	@Then("Admin lands on login page")
 	public void admin_lands_on_login_page() {
-		loginPage = new LoginPage(driver);
+		loginPage = new LoginPage(context);
 		Assert.assertTrue(loginPage.getPageURL().contains("login"));
 	}
 
 	// @TTLPH2-12 Validate login with valid data in all field
 	@When("Admin enter valid data in all field and clicks login button")
 	public void admin_enter_valid_data_in_all_field_and_clicks_login_button() {
+//
+//		String username = readConfig.getUsername();
+//		String password = readConfig.getPassword();
 
-		String username = readConfig.getUsername();
-		String password = readConfig.getPassword();
-
-		homePage = (HomePage) loginPage.doLoginWithValidCredentials(username, password, "Admin");
-
+	//	homePage = (HomePage) loginPage.doLoginWithValidCredentials(username, password, "Admin");
+		 homePage = (HomePage) loginPage.doLoginWithValidCredentials(readConfig.getUsername(), readConfig.getPassword(), "Admin");
+		   
 	}
 
 	@Then("Admin should land on home page")
@@ -250,7 +256,7 @@ public class LoginStepDef {
 			Assert.assertTrue(actualErrMsg.contains("unknown error: net::ERR_NAME_NOT_RESOLVED"));
 		} else
 			// but if some page gets loaded, make sure it is not login page
-			Assert.assertFalse(new LoginPage(driver).isPasswordFieldPresent());
+			Assert.assertFalse(new LoginPage(context).isPasswordFieldPresent());
 
 	}
 

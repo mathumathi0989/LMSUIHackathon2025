@@ -6,22 +6,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import hooks.TestContext;
 import utilities.ElementUtil;
 import utilities.Log;
 import utilities.RunTimeData;
 
 public class ClassPage extends CommonPage {
 
-	private WebDriver driver;
+	private TestContext context;
 	private WebDriverWait wait;
 	Actions actions;
 
@@ -147,8 +148,8 @@ public class ClassPage extends CommonPage {
 	private By logoutBtn = By.xpath("//span[text()='Logout']");
 	
 
-	public ClassPage(WebDriver driver) {
-		super(driver);
+	public ClassPage(TestContext context) {
+		super(context);
 		this.driver = driver;
 		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		actions = new Actions(driver);
@@ -290,9 +291,9 @@ public class ClassPage extends CommonPage {
 			for(WebElement optionElement: elementUtil.getElements(By.xpath("//p-dropdownitem//span"))) {
 				
 				String optionText = optionElement.getText();
-				if(optionText.equals((String)RunTimeData.getData("BatchName_Mandatory"))) {
-					
-					runTimeBatchName = (String)RunTimeData.getData("BatchName_Mandatory");
+				String batchNameOpt = (String) RunTimeData.getData("BatchName_Mandatory"); 
+				if (batchNameOpt!=null && optionText.equals(batchNameOpt)) { 
+					runTimeBatchName = batchNameOpt; 
 					System.out.println("run-time Batch Name found in dropdown list");
 					break;
 				}

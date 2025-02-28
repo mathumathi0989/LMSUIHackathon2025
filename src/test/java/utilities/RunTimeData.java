@@ -1,21 +1,25 @@
 package utilities;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 
 public class RunTimeData {
 
-	private static final Map<String, Object> dataMap = new HashMap<>();
+	private static final ThreadLocal<ScenarioContext> scenarioContextThreadLocal = ThreadLocal.withInitial(ScenarioContext::new);
 
 	public static void setData(String key, Object value) {
-		dataMap.put(key, value);
+	    scenarioContextThreadLocal.get().setData(key, value);
 	}
 
+	// Directly return the value instead of using Optional
 	public static Object getData(String key) {
-		return dataMap.get(key);
+	    return scenarioContextThreadLocal.get().getData(key);
 	}
-	
+
+	public static void clearScenarioContext() {
+	    scenarioContextThreadLocal.remove(); // Fully removes the instance from ThreadLocal
+	}
+
 	public static void emptyDataMap() {
-		dataMap.clear();
+	    clearScenarioContext(); // Ensures all scenario data is removed
 	}
 }

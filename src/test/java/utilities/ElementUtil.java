@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
+import org.openqa.selenium.NoSuchElementException;
 import java.util.Random;
 
 import org.openqa.selenium.Alert;
@@ -130,9 +130,11 @@ public class ElementUtil {
 
 	public WebElement elementWithFluentWaitLocated(By locator, int timeOutInSeconds, int pollingIntervalInMillis) {
 
-		WebElement ele = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(timeOutInSeconds))
-				.pollingEvery(Duration.ofMillis(pollingIntervalInMillis)).ignoring(NoSuchElementException.class)
-				.until(ExpectedConditions.visibilityOfElementLocated(locator));
+		   WebElement ele = new FluentWait<WebDriver>(driver)
+		            .withTimeout(Duration.ofSeconds(timeOutInSeconds))
+		            .pollingEvery(Duration.ofMillis(pollingIntervalInMillis))
+		            .ignoring(NoSuchElementException.class)
+		            .until(ExpectedConditions.visibilityOfElementLocated(locator));
 
 		return ele;
 

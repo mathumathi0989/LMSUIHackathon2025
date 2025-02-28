@@ -10,7 +10,7 @@ Feature: Program Module
     When Admin clicks "Program" on the navigation bar
     Then Admin should be navigated to Program page
 
-  @TC2 @MenuBar @smoke
+  @TC2 @MenuBar 
   Scenario: Verify Logout displayed in menu bar
     Given Admin is on home page after Login
     When Admin clicks "Program" on the navigation bar
@@ -34,7 +34,7 @@ Feature: Program Module
     When Admin clicks "Program" on the navigation bar
     Then Admin should see the Manage Program "Manage Program" Heading
 
-  @TC6 @ManageProgramPageValidation @smoke
+  @TC6 @ManageProgramPageValidation 
   Scenario: Verify view details of programs
     Given Admin is on home page after Login
     When Admin clicks "Program" on the navigation bar
@@ -301,13 +301,13 @@ Feature: Program Module
     When Admin clicks Last page link
     Then Admin should see the last page record on the table with Next page link are disabled
 
-  @TC43 @ProgramPagination @smoke
+  @TC43 @ProgramPagination 
   Scenario: Verify Admin is able to click Previous page link
     Given Admin is on last page of Program page table
     When Admin clicks Previous page link
     Then Admin should see the previous page record on the table with pagination has previous page link
 
-  @TC44 @ProgramPagination @smoke
+  @TC44 @ProgramPagination 
   Scenario: Verify Admin is able to click  First page link
     Given Admin is on Previous Program page
     When Admin clicks First page link
@@ -317,13 +317,13 @@ Feature: Program Module
      
      
 
-  @TC45 @ProgramSorting  @smoke
+  @TC45 @ProgramSorting  
   Scenario: Verify sorting of  Program name in ascending order
     Given Admin is on Program page
     When Admin clicks on Arrow next to Program Name of Program module page for sort ascending
     Then Admin See the Program Name is sorted in ascending order
 
-  @TC46 @ProgramSorting @smoke
+  @TC46 @ProgramSorting 
   Scenario: Verify sorting of Program name in Descending order
     Given Admin is on Program page
     When Admin clicks on Arrow next to Program Name of Program module page for sort descend

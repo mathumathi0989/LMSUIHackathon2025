@@ -9,15 +9,16 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import utilities.Log;
+import hooks.TestContext;
 import utilities.ElementUtil;
+import utilities.Log;
 
 public class CommonPage {
-	protected WebDriver driver;
+	  private TestContext context;
+	  protected WebDriver driver;  // ✅ Stores WebDriver for direct use
 	protected ElementUtil util;
 	protected int selectedRows;
 	protected int beforeCount;
@@ -56,12 +57,18 @@ public class CommonPage {
 
 	
 
-	public CommonPage(WebDriver driver) {
-		this.driver = driver;
-		PageFactory.initElements(driver, this); 
-		util = new ElementUtil(this.driver);
-	}
+	  public CommonPage(TestContext context) {
+		  this.context = context;
+	        this.driver = context.getDriver();  // ✅ Assign WebDriver for child classes
 
+	        // Ensure the driver is not null
+	        if (this.driver == null) {
+	          //  Log.logError("WebDriver is not initialized.");
+	            throw new IllegalStateException("WebDriver is not initialized.");
+	        }
+
+	        this.util = new ElementUtil(driver); // ✅ Pass WebDriver to ElementUtil
+	    }
 
 	@FindBy(xpath = "//button[@id='logout']")
 	WebElement logout;
@@ -69,8 +76,13 @@ public class CommonPage {
 	
 
 	public String getPageTitle() {
+		// Ensure the driver is initialized before calling any actions on it
+        if (driver == null) {
+          //  Log.logError("WebDriver is not initialized.");
+            throw new IllegalStateException("WebDriver is not initialized.");
+        }
 
-		return driver.getTitle();
+        return driver.getTitle();
 	}
 
 	public void logout() {
@@ -82,19 +94,19 @@ public class CommonPage {
 		switch (menuName.toLowerCase().trim()) {
 		case "program":
 			util.doClick(menu_Program);
-			return new ProgramPage(driver);
+			return new ProgramPage(context);
 
 		case "batch":
 			util.doClick(menu_Batch);
-			return new BatchPage(driver);
+			return new BatchPage(context);
 
 		case "class": 
 			util.doClick(menu_Class);
-			return new ClassPage(driver);
+			return new ClassPage(context);
 
 		case "logout":
 			util.doClick(menu_logout);
-			return new LoginPage(driver);
+			return new LoginPage(context);
 			
 		default:
 			throw new Exception("Something went wrong!");

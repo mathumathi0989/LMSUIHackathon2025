@@ -19,7 +19,6 @@ import utilities.Log;
 import utilities.ReadConfig;
 
 public class ClassStepDef {
-	private WebDriver driver;
 	private TestContext context;
 	private ClassPage classPage;
 	private ReadConfig readConfig;
@@ -33,9 +32,9 @@ public class ClassStepDef {
 
 	public ClassStepDef(TestContext context) {
 		this.context = context;
-		driver = context.getDriver();
+	
 		// classPage = new ClassPage(driver, context);
-		classPage = new ClassPage(driver);
+		classPage = new ClassPage(context);
 		readConfig = new ReadConfig();
 		softAssert = new SoftAssert();
 
@@ -44,10 +43,10 @@ public class ClassStepDef {
 	@Given("Admin is on the dashboard page after login")
 	public void admin_is_on_the_dashboard_page_after_login() {
 
-		loginPage = new LoginPage(driver);
+		loginPage = new LoginPage(context);
 		homePage = (HomePage) loginPage.doLoginWithValidCredentials(readConfig.getUsername(), readConfig.getPassword(),
 				"Admin");
-		Log.logInfo("DashBoard Url is " + driver.getCurrentUrl());
+	//	Log.logInfo("DashBoard Url is " + ((WebDriver) context).getCurrentUrl());
 
 	}
 
@@ -67,7 +66,7 @@ public class ClassStepDef {
 	@Then("Admin should land on the Manage class page with Title {string}")
 	public void admin_should_land_on_the_manage_class_page_with_title(String Expected) {
 		Log.logInfo("Navigated to Manage class page ");
-		String current_Title = driver.getTitle();
+		String current_Title = ((WebDriver) context).getTitle();
 		Assert.assertEquals(current_Title, Expected);
 	}
 
@@ -545,7 +544,7 @@ public class ClassStepDef {
 	public void admin_is_redirected_to_login_page() {
 
 		Log.logInfo("Navigated to Dashboard  page ");
-		String current_Title = driver.getTitle();
+		String current_Title = ((WebDriver) context).getTitle();
 		String Expected = "LMS";
 		Assert.assertEquals(current_Title, Expected);
 	}

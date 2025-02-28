@@ -1,22 +1,23 @@
 package pageObjects;
 
+import java.io.IOException;
+import java.util.List;
+
+import org.languagetool.JLanguageTool;
+import org.languagetool.language.AmericanEnglish;
+import org.languagetool.rules.RuleMatch;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.languagetool.JLanguageTool;
-import org.languagetool.language.AmericanEnglish;
-import org.languagetool.rules.RuleMatch;
 
-import java.io.IOException;
-import java.util.List;
-
+import hooks.TestContext;
 import utilities.ElementUtil;
 import utilities.Log;
 
 public class HomePage extends CommonPage {
 
-	private WebDriver driver;
+	 private TestContext context;
 	private ElementUtil util;
 
 	private By dashboardHeader = By.xpath("//div[normalize-space()='Dashboard']");
@@ -41,11 +42,11 @@ public class HomePage extends CommonPage {
 	private By firstPageIcon = By.xpath("//*[name()='path' and contains(@d,'M15.41 7.4')]");
 	private By StaffTableRow = By.xpath("//mat-row[@class='mat-row cdk-row ng-star-inserted']");
 
-	public HomePage(WebDriver driver) {
-		super(driver);
-		this.driver = driver;
-		util = new ElementUtil(this.driver);
-	}
+	  public HomePage(TestContext context) {
+	        super(context); // Now, context is initialized before calling super()
+	        this.context = context;
+	        this.util = new ElementUtil(context.getDriver()); // Use ThreadLocal-safe WebDriver
+	    }
 
 	public boolean isDashboardHeaderVisible() {
 		return util.isElementDisplayed(dashboardHeader);

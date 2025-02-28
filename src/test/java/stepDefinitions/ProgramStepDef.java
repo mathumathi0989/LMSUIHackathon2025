@@ -3,6 +3,7 @@ package stepDefinitions;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -35,8 +36,8 @@ public class ProgramStepDef {
 		this.context = context;
 		this.driver = context.getDriver();
 		this.readConfig = new ReadConfig();
-		programPage = new ProgramPage(driver);
-		homePage = new HomePage(driver);
+		programPage = new ProgramPage(context);
+		homePage = new HomePage(context);
 	}
 
 	@Then("Admin should be navigated to Program page")
@@ -204,14 +205,26 @@ public class ProgramStepDef {
 	@When("Admin searches with newly created Program {string}")
 	public void admin_searches_with_newly_updated(String newProgName) {
 
-		programPage.search(newProgName);
+		 Object programNameObj = RunTimeData.getData("programName");
+
+		    if (programNameObj != null) {
+		        String programName = programNameObj.toString(); // Convert object to string
+		        System.out.println("Program Name: " + programName);
+		        programPage.search(programName);
+		    } else {
+		        Assert.fail("programName is not present in RunTimeData");
+		    }
 	}
 
 	@Then("Records of the newly created  program is displayed and match the data entered")
 	public void admin_verifies_that_the_details_are_correctly_updated() {
 
-		Assert.assertEquals(programPage.verifySearchResultProgramName(), (String) RunTimeData.getData("programName"),
-				"Searched Program Name does not match the result!");
+	    String programName = (String) RunTimeData.getData("programName");
+	    if (programName!=null) {
+	        Assert.assertEquals(programPage.verifySearchResultProgramName(), programName, "Searched Program Name does not match the result!");
+	    } else {
+	        Assert.fail("programName is not present in RunTimeData");
+	    }
 
 	}
 
@@ -232,17 +245,24 @@ public class ProgramStepDef {
 
 	@Then("Updated program Name and Desc and Status is seen by the Admin")
 	public void updated_program_name_and_desc_and_status_is_seen_by_the_admin() {
+		String programNameEdit =  (String) RunTimeData.getData("programNameEdit");
+		String programDescEdit = (String) RunTimeData.getData("programDescEdit");
+	   String programStatusEdit = (String) RunTimeData.getData("programStatusEdit");
 
-		programPage.searchUpdatedProgram((String) RunTimeData.getData("programNameEdit"));
+	    if (programNameEdit != null && programDescEdit != null && programStatusEdit != null) {
+	        programPage.searchUpdatedProgram(programNameEdit);
 
-		Map<String, String> resultaMap = programPage.verifyUpdatedProgramDetails();
+	        Map<String, String> resultaMap = programPage.verifyUpdatedProgramDetails();
 
-		Assert.assertEquals((String) RunTimeData.getData("programNameEdit"), resultaMap.get("resultProgramNameText"),
-				"Searched Program Name does not match the result!");
-		Assert.assertEquals((String) RunTimeData.getData("programDescEdit"), resultaMap.get("resultProgramDescText"),
-				"Searched Program Desc does not match the result!");
-		Assert.assertEquals((String) RunTimeData.getData("programStatusEdit"),
-				resultaMap.get("resultProgramStatusText"), "Searched Program Status does not match the result!");
+	        Assert.assertEquals(programNameEdit, resultaMap.get("resultProgramNameText"),
+	                "Searched Program Name does not match the result!");
+	        Assert.assertEquals(programDescEdit, resultaMap.get("resultProgramDescText"),
+	                "Searched Program Desc does not match the result!");
+	        Assert.assertEquals(programStatusEdit, resultaMap.get("resultProgramStatusText"),
+	                "Searched Program Status does not match the result!");
+	    } else {
+	        Assert.fail("One or more required data fields are not present in RunTimeData");
+	    }
 	}
 
 	@Then("Admin should see Search bar with text as {string}")
@@ -310,9 +330,15 @@ public class ProgramStepDef {
 	@Given("Admin is on Confirm deletion form for program {string}")
 	public void admin_is_on_confirm_deletion_form(String programName) throws Exception {
 
-		programPage = (ProgramPage) homePage.selectOptionNavigationMenuBar("Program");
-		programPage.searchUpdatedProgram((String) RunTimeData.getData("programNameEdit"));
-		programPage.clickDeleteProgramBtn((String) RunTimeData.getData("programNameEdit"));
+		  programPage = (ProgramPage) homePage.selectOptionNavigationMenuBar("Program");
+
+		    String programNameEdit = (String) RunTimeData.getData("programNameEdit");
+		    if (programNameEdit != null) {
+		        programPage.searchUpdatedProgram(programNameEdit);
+		        programPage.clickDeleteProgramBtn(programNameEdit);
+		    } else {
+		        Assert.fail("programNameEdit is not present in RunTimeData");
+		    }
 	}
 
 	@When("Admin clicks on Yes button")

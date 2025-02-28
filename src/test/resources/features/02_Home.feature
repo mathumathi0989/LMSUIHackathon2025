@@ -71,13 +71,13 @@ Feature: Home Page
     When Admin enter valid data in all field and clicks login button
     Then Admin should see piechart
 
-  @Scenario12_homePage @smoke
+  @Scenario12_homePage 
   Scenario: Verify user details
     Given Admin lands on login page
     When Admin enter valid data in all field and clicks login button
     Then Admin should see welcome message with user name and role
 
-  @Scenario13_homePage @smoke
+  @Scenario13_homePage 
   Scenario: Verify bar chart
     Given Admin lands on login page
     When Admin enter valid data in all field and clicks login button

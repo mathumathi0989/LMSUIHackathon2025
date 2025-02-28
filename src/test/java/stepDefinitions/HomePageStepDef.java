@@ -24,8 +24,8 @@ public class HomePageStepDef {
 		this.context = Context;
 		driver = context.getDriver();
 		this.readConfig = new ReadConfig();
-		homePage = new HomePage(driver);
-		loginPage = new LoginPage(driver);
+		homePage = new HomePage(context);
+		loginPage = new LoginPage(context);
 	}
 
 	@Then("Admin should see LMS -Learning management system as title")

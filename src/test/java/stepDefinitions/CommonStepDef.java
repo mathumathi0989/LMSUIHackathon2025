@@ -33,7 +33,7 @@ public class CommonStepDef {
 	
 	@Given("Admin is logged in to LMS Portal")
 	public void admin_is_logged_in_to_lms_portal() {
-		loginPage = new LoginPage(driver);
+		loginPage = new LoginPage(context);
 		homePage =  (HomePage) loginPage.doLoginWithValidCredentials(readConfig.getUsername(), readConfig.getPassword(), "Admin");
 		
 	//	Log.logInfo("Home Page Title >>>>"+this.homePage.getPageTitle());
@@ -93,7 +93,7 @@ public class CommonStepDef {
 	@Then("Admin should receive error message")
 	public void admin_should_receive_error_message() {
 
-		Assert.assertFalse(new LoginPage(driver).getPageURL().contains("login"));
+		Assert.assertFalse(new LoginPage(context).getPageURL().contains("login"));
 	}
 
 

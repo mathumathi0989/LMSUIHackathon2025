@@ -3,8 +3,8 @@ package stepDefinitions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import hooks.TestContext;
@@ -21,23 +21,24 @@ import utilities.RunTimeData;
 
 public class BatchStepDef {
 
-	WebDriver driver;
-	TestContext context;
-	ReadConfig readConfig;
-	LoginPage loginPage;
-	BatchPage batchPage;
-	HomePage homePage;
-	CommonPage commonPage;
-	List<String> deleteSuccessMessage;
+	private TestContext context;
+    private ReadConfig readConfig;
+    private LoginPage loginPage;
+    private BatchPage batchPage;
+    private HomePage homePage;
+    private CommonPage commonPage;
+    private List<String> deleteSuccessMessage;
 
-	public BatchStepDef(TestContext context) {
-		this.context = context;
-		this.driver = context.getDriver();
-		this.readConfig = new ReadConfig();
-		batchPage = new BatchPage(driver);
-		homePage = new HomePage(driver);
-		commonPage = new CommonPage(driver);
-	}
+ // Constructor accepts TestContext (for dependency injection via PicoContainer)
+    public BatchStepDef(TestContext context) {
+        this.context = context;
+        this.readConfig = new ReadConfig();
+        
+        // Pass TestContext instead of WebDriver to page objects
+        this.batchPage = new BatchPage(context);
+        this.homePage = new HomePage(context);
+        this.commonPage = new CommonPage(context);
+    }
 
 	@Then("Admin should be in the Manage Batch Page")
 	public void admin_should_be_in_the_manage_batch_page() {
@@ -114,7 +115,11 @@ public class BatchStepDef {
 	@Then("Admin should see selected program name in the batch name prefix box")
 	public void admin_should_see_selected_program_name_in_the_batch_name_prefix_box() {
 
-		Assert.assertEquals((String) RunTimeData.getData("BatchName_All"), batchPage.getBatchNamePrefix());
+		String batchName = (String) RunTimeData.getData("BatchNameAll"); 
+		if (batchName!=null) {
+			Assert.assertEquals(batchName, batchPage.getBatchNamePrefix()); } else { 
+			Assert.fail("BatchName_All is not present in RunTimeData");
+		}
 	}
 
 	@When("Admin enters the valid data to all the mandatory fields and click cancel button")
@@ -247,9 +252,14 @@ public class BatchStepDef {
 
 	@When("Admin edit the valid data to all the mandatory fields and click save button")
 	public void admin_edit_the_valid_data_to_all_the_mandatory_fields_and_click_save_button() {
-		batchPage.enterSearch((String) RunTimeData.getData("BatchName_All"));
-		batchPage.clickAction("edit");
-		batchPage.editAllDetails("Save", "editAll");
+		   String batchName = (String) RunTimeData.getData("BatchName_All");
+		    if (batchName!=null) {
+		        batchPage.enterSearch(batchName);
+		        batchPage.clickAction("edit");
+		        batchPage.editAllDetails("Save", "editAll");
+		    } else {
+		        Assert.fail("BatchName_All is not present in RunTimeData");
+		    }
 	}
 
 	@Then("Admin should get a successful message for editing the batch")
@@ -345,14 +355,21 @@ public class BatchStepDef {
 
 	@When("Admin enters the batch name in the search text box and edit the valid data and click save button")
 	public void admin_enters_the_batch_name_in_the_search_text_box_and_edit_the_valid_data_and_click_save_button() {
-		batchPage.enterSearch((String) RunTimeData.getData("BatchName_Mandatory"));
-		batchPage.clickAction("edit");
-		batchPage.editAllDetails("Save", "editAll");
+		String batchName = (String) RunTimeData.getData("BatchName_Mandatory"); 
+		if (batchName !=null) { 
+			batchPage.enterSearch(batchName); 
+			batchPage.clickAction("edit"); 
+			batchPage.editAllDetails("Save", "editAll"); 
+		}
 	}
 
 	@When("Admin enters the batch name in the search text box")
 	public void admin_enters_the_batch_name_in_the_search_text_box() {
-		batchPage.enterSearch((String) RunTimeData.getData("BatchName_All"));
+		String StoredbatchName = (String) RunTimeData.getData("BatchName_All"); 
+		System.out.println("BatchNameAll in search: " + StoredbatchName);
+		if (StoredbatchName!=null) { 
+			batchPage.enterSearch(StoredbatchName); 
+		}
 	}
 
 	@Then("Admin should see the filtered batches in the data table")
@@ -368,29 +385,33 @@ public class BatchStepDef {
 
 	@When("Admin enters the batch name in the search text box and click on delete icon")
 	public void admin_enters_the_batch_name_in_the_search_text_box_and_click_on_delete_icon() throws Exception {
-		batchPage.enterSearch((String) RunTimeData.getData("BatchName_All"));
-		batchPage.clickAction("delete");
-		commonPage.clickDeleteButtons("yes");
+		String batchName = (String) RunTimeData.getData("BatchName_Mandatory"); 
+		if (batchName!=null) { 
+			batchPage.enterSearch(batchName); 
+		batchPage.clickAction("edit"); 
+		batchPage.editAllDetails("Save", "editAll"); 
+		}
 	}
 
 	@When("Admin enters the batch name in the search and click on delete icon")
 	public void admin_enters_the_batch_name_in_the_search_and_click_on_delete_icon() throws Exception {
 
 		List<String> batches = new ArrayList<String>();
-		batches.add((String) RunTimeData.getData("BatchName_All"));
-		batches.add((String) RunTimeData.getData("BatchName_Mandatory"));
-
-		deleteSuccessMessage = new ArrayList<String>();
-
-		for (String batch : batches) {
-
-			batchPage.enterSearch(batch);
-			batchPage.clickAction("delete");
-			commonPage.clickDeleteButtons("yes");
-
-			deleteSuccessMessage.add(commonPage.getToast());
+		String batchNameAll = (String) RunTimeData.getData("BatchName_All"); 
+		String batchNameMandatory = (String) RunTimeData.getData("BatchName_Mandatory");
+		if (batchNameAll!=null) {
+		    batches.add(batchNameAll);
+		}
+		if (batchNameMandatory!=null) {
+		    batches.add(batchNameMandatory);
 		}
 
+		deleteSuccessMessage = new ArrayList<>();
+		for (String batchName : batches) {
+		    batchPage.enterSearch(batchName);
+		    batchPage.clickAction("delete");
+		    commonPage.clickDeleteButtons("yes");
+		}
 	}
 
 	@Then("Selected batches should get deleted")

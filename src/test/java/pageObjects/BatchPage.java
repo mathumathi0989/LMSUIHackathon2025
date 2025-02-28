@@ -5,16 +5,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import hooks.TestContext;
 import utilities.ElementUtil;
 import utilities.ExcelReader;
 import utilities.Log;
@@ -23,11 +24,11 @@ import utilities.RunTimeData;
 
 public class BatchPage extends CommonPage {
 
-	private WebDriver driver;
+	 private TestContext context;
 	private ElementUtil util;
-	ReadConfig readConfig;
-	Map<String, String> testData;
-	ExcelReader excelReader = new ExcelReader();
+	 private ReadConfig readConfig;
+	 private Map<String, String> testData;
+	    private ExcelReader excelReader = new ExcelReader();
 	private By homeMenu = By.xpath("//span[normalize-space()='Home']");
 	private By batchMenu = By.xpath("//span[contains(text(),'Batch')]");
 	private By batchTitle = By.xpath("//*[contains(text(),'Manage Batch')]");
@@ -78,11 +79,11 @@ public class BatchPage extends CommonPage {
 	private String sheetName = "Batch";
 	private WebDriverWait wait;
 
-	public BatchPage(WebDriver driver) {
-		super(driver);
-		this.driver = driver;
-		util = new ElementUtil(this.driver);
-		readConfig = new ReadConfig();
+	public BatchPage(TestContext context) {
+		super(context); // Pass WebDriver to parent class
+        this.context = context;
+        this.util = new ElementUtil(context.getDriver());
+        this.readConfig = new ReadConfig();
 	}
 
 	/**
@@ -193,15 +194,16 @@ public class BatchPage extends CommonPage {
 		String existingProgram = null;
 		if (excelProgramName.equalsIgnoreCase("chaining")) {
 
-			existingProgram = (String) RunTimeData.getData("programNameEdit");
+			existingProgram = (String)RunTimeData.getData("programNameEdit");
+	     
 
 			Log.logInfo("ProgramName at run time received in line 193 in EditProgramPage = " + existingProgram);
 
 			while (existingProgram == null) {
 				Thread.sleep(1000);
 				// Then fetch data again
-				existingProgram = (String) RunTimeData.getData("programNameEdit");
-			}
+				 existingProgram = (String)RunTimeData.getData("programNameEdit");
+		    	}
 		}
 
 		By optionList = By.xpath("//ul[@role='listbox']");
@@ -214,6 +216,8 @@ public class BatchPage extends CommonPage {
 				Log.logInfo("Option is found");
 
 				util.doClick(option);
+				
+				System.out.println("Selected Program Name from list box");
 			}
 
 		}
@@ -322,16 +326,20 @@ public class BatchPage extends CommonPage {
 				if (toastMessage.equalsIgnoreCase("Successful")) {
 					if (testcaseName.equalsIgnoreCase("validAll")) {
 						Log.logInfo("Batch created successfully - chaining");
+						System.out.println("Batch created successfully - chaining");
 						String finalBatchName = (String) RunTimeData.getData("programNameEdit") + newBatchName;
-						Log.logInfo("BatchName_All: " + finalBatchName);
-						RunTimeData.setData("BatchName_All", finalBatchName);
+		                     Log.logInfo("BatchName_All: " + finalBatchName);
+		                    RunTimeData.setData("BatchName_All", finalBatchName);
+		                    System.out.println("Batch chaining saved in runtime data " +finalBatchName);
+		                   System.out.println("Getting Batch Chaining data " + RunTimeData.getData("BatchName_All"));
 					} else {
 
 						Log.logInfo("Batch created successfully - " + toastMessage);
-						String finalBatchName1 = (String) RunTimeData.getData("programNameEdit") + newBatchName;
-
-						Log.logInfo("BatchName_Mandatory: " + finalBatchName1);
-						RunTimeData.setData("BatchName_Mandatory", finalBatchName1);
+						String finalBatchName1 = (String)RunTimeData.getData("programNameEdit")+newBatchName;
+		                    Log.logInfo("BatchName_Mandatory: " + finalBatchName1);
+		                    System.out.println("Batch created successfully - not chaining");
+		                    RunTimeData.setData("BatchName_Mandatory", finalBatchName1);
+		                    System.out.println("Batch not chaining saved in runtime data " +finalBatchName1);
 
 					}
 				} else {
@@ -544,9 +552,11 @@ public class BatchPage extends CommonPage {
 		js.executeScript("document.elementFromPoint(0, 0).click();");
 		WebElement Searchtext = wait.until(ExpectedConditions.presenceOfElementLocated(searchBox));
 		util.doClick(Searchtext);
+		System.out.println("Clicked on search box");
 		Searchtext.clear();
 		Log.logInfo("Batch name is: " + search);
 		Searchtext.sendKeys(search);
+		System.out.println("Entered search text");
 	}
 
 	public boolean validateSearch() {
@@ -563,10 +573,11 @@ public class BatchPage extends CommonPage {
 				if (batchRows.size() > 0) {
 					for (WebElement row : batchRows) {
 						String rowText = row.getText();
-						Log.logInfo("search text is: " + (String) RunTimeData.getData("BatchName_All"));
-						if (rowText.contains((String) RunTimeData.getData("BatchName_All"))) {
-							flag = true;
-							break;
+						String batchNameAll = (String) RunTimeData.getData("BatchName_All");
+		                     Log.logInfo("search text is: " + batchNameAll);
+		                    if (rowText.contains(batchNameAll)) {
+		                        flag = true;
+		                        break;
 						}
 					}
 				} else {

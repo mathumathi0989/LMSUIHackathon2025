@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="GroupIDName" thread-count="3">
-    <test name="TestChrome">
-        <parameter name="browser" value="Chrome"></parameter>
+<suite name="LMSParallelSuite" parallel="false" thread-count="2">
+    <test name="TestChrome" parallel="false" thread-count="2">
+        <parameter name="browser" value="chrome"></parameter>
+        <parameter name="headless" value="true"/>
         <classes>
             <class name="testRunner.TestRunner"/>
-            <class name="testRunner.RerunTestRunner"/>
         </classes>
     </test>  
     <test name="Testfirefox">
-        <parameter name="browser" value="Firefox"></parameter>
+        <parameter name="browser" value="firefox"></parameter>
+        <parameter name="headless" value="false"/>
         <classes>
             <class name="testRunner.TestRunner"/>
             <class name="testRunner.RerunTestRunner"/>
         </classes>
     </test>  
     <test name="Testedge">
-        <parameter name="browser" value="Edge"></parameter>
+        <parameter name="browser" value="edge"></parameter>
+        <parameter name="headless" value="false"/>
         <classes>
             <class name="testRunner.TestRunner"/>
             <class name="testRunner.RerunTestRunner"/>
