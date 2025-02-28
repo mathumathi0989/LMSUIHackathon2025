@@ -788,3 +788,164 @@
 2025-02-28 12:16:56.971 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
 2025-02-28 12:17:30.187 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
 2025-02-28 12:17:30.188 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 13:48:32.329 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 13:48:32.336 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 13:48:39.308 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 13:48:39.309 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 13:48:59.754 INFO [main] [utilities.Log.logInfo(Log.java:13)] - The LMS page title is LMS
+2025-02-28 13:48:59.755 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 13:48:59.755 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 13:49:06.170 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 13:49:06.171 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 13:49:21.947 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Page Title :LMS
+2025-02-28 13:49:42.580 INFO [main] [pageObjects.ProgramPage.fillProgramForm(ProgramPage.java:168)] - Program data from excel --{=, ProgramDescription=Advanced level SAP, ProgramName=technoTribeProg, testcase=validInputData, ProgramStatus=Active}
+2025-02-28 13:49:42.582 INFO [main] [pageObjects.ProgramPage.fillProgramForm(ProgramPage.java:179)] - Program Name Input :technoTribeProgkcm
+2025-02-28 13:49:48.632 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Toast Message >>Successful
+2025-02-28 13:49:48.633 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 13:49:48.633 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 13:49:56.497 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 13:49:56.498 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 13:50:36.395 INFO [main] [pageObjects.ProgramPage.verifySearchResultProgramName(ProgramPage.java:422)] - Search result >>technoTribeProgkcm
+2025-02-28 13:50:36.396 INFO [main] [pageObjects.ProgramPage.verifySearchResultProgramName(ProgramPage.java:423)] - Search result validation passed: technoTribeProgkcm
+2025-02-28 13:50:36.397 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 13:50:36.397 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 13:50:45.264 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 13:50:45.264 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 13:51:21.835 INFO [main] [utilities.Log.logInfo(Log.java:13)] - ProgramName at run time received in line 235 in ProgramPage = technoTribeProgkcm
+2025-02-28 13:51:27.780 INFO [main] [pageObjects.ProgramPage.editTheProgramAndClickSave(ProgramPage.java:233)] - Program name to update from excel >>editprogtest
+2025-02-28 13:51:33.710 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Toast Message >>Successful
+2025-02-28 13:51:34.693 INFO [main] [pageObjects.ProgramPage.verifyUpdatedProgramDetails(ProgramPage.java:450)] - Search result Name >>editprogtestusk
+2025-02-28 13:51:34.693 INFO [main] [pageObjects.ProgramPage.verifyUpdatedProgramDetails(ProgramPage.java:451)] - Search result Desc >>Advanced level Java
+2025-02-28 13:51:34.693 INFO [main] [pageObjects.ProgramPage.verifyUpdatedProgramDetails(ProgramPage.java:452)] - Search result validation passed: 
+2025-02-28 13:51:34.693 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 13:51:34.694 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 13:51:43.698 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 13:51:43.701 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 13:52:25.960 INFO [main] [utilities.Log.logInfo(Log.java:13)] - ProgramName at run time received in line 193 in EditProgramPage = editprogtestusk
+2025-02-28 13:52:29.006 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Option Section is visible
+2025-02-28 13:52:29.077 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Option is found
+2025-02-28 13:52:46.441 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Batch created successfully - Successful
+2025-02-28 13:52:46.442 INFO [main] [utilities.Log.logInfo(Log.java:13)] - BatchName_Mandatory: editprogtestusk127
+2025-02-28 13:52:46.801 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Batch created successfully
+2025-02-28 13:52:46.802 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 13:52:46.802 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 13:52:54.126 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 13:52:54.127 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 13:53:34.175 INFO [main] [utilities.Log.logInfo(Log.java:13)] - ProgramName at run time received in line 193 in EditProgramPage = editprogtestusk
+2025-02-28 13:53:37.223 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Option Section is visible
+2025-02-28 13:53:37.272 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Option is found
+2025-02-28 13:53:54.092 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Batch created successfully - chaining
+2025-02-28 13:53:54.093 INFO [main] [utilities.Log.logInfo(Log.java:13)] - BatchName_All: editprogtestusk58
+2025-02-28 13:53:54.401 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Batch created successfully
+2025-02-28 13:53:54.402 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 13:53:54.402 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 13:54:01.564 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 13:54:01.567 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 13:54:40.011 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Batch name is: editprogtestusk58
+2025-02-28 13:54:41.030 INFO [main] [utilities.Log.logInfo(Log.java:13)] - search text is: editprogtestusk58
+2025-02-28 13:54:41.112 INFO [main] [utilities.Log.logInfo(Log.java:13)] - StaleElementReferenceException encountered. Retrying... 1
+2025-02-28 13:54:41.574 INFO [main] [utilities.Log.logInfo(Log.java:13)] - search text is: editprogtestusk58
+2025-02-28 13:54:41.576 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 13:54:41.576 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 13:54:49.756 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 13:54:49.756 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 13:55:05.448 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigated to home page 
+2025-02-28 13:56:00.722 INFO [main] [utilities.Log.logInfo(Log.java:13)] - batch name displayed:     true
+2025-02-28 13:57:43.517 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 13:57:44.352 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 13:57:54.106 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 13:57:54.106 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 13:58:31.602 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Batch name is: editprogtestusk58
+2025-02-28 13:58:54.578 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Batch name is: editprogtestusk127
+2025-02-28 13:59:17.427 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 13:59:17.428 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 13:59:25.142 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 13:59:25.144 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 14:00:00.182 INFO [main] [pageObjects.ProgramPage.clickDeleteProgramBtn(ProgramPage.java:297)] - Program to be deleted >>>editprogtestusk
+2025-02-28 14:00:03.804 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Toast Message >>Successful
+2025-02-28 14:00:03.804 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 14:00:03.804 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 14:00:12.119 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 14:00:12.119 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 14:00:45.022 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 14:00:45.023 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 14:23:41.708 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 14:23:41.714 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 14:23:48.078 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 14:23:48.078 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 14:24:05.352 INFO [main] [utilities.Log.logInfo(Log.java:13)] - The LMS page title is LMS
+2025-02-28 14:24:05.353 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 14:24:05.354 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 14:24:11.917 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 14:24:11.918 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 14:24:28.311 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Page Title :LMS
+2025-02-28 14:24:49.797 INFO [main] [pageObjects.ProgramPage.fillProgramForm(ProgramPage.java:168)] - Program data from excel --{=, ProgramDescription=Advanced level SAP, ProgramName=technoTribeProg, testcase=validInputData, ProgramStatus=Active}
+2025-02-28 14:24:49.798 INFO [main] [pageObjects.ProgramPage.fillProgramForm(ProgramPage.java:179)] - Program Name Input :technoTribeProgniq
+2025-02-28 14:24:55.524 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Toast Message >>Successful
+2025-02-28 14:24:55.525 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 14:24:55.525 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 14:25:03.714 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 14:25:03.715 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 14:25:40.251 INFO [main] [pageObjects.ProgramPage.verifySearchResultProgramName(ProgramPage.java:422)] - Search result >>technoTribeProgniq
+2025-02-28 14:25:40.256 INFO [main] [pageObjects.ProgramPage.verifySearchResultProgramName(ProgramPage.java:423)] - Search result validation passed: technoTribeProgniq
+2025-02-28 14:25:40.258 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 14:25:40.258 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 14:25:47.672 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 14:25:47.672 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 14:26:22.399 INFO [main] [utilities.Log.logInfo(Log.java:13)] - ProgramName at run time received in line 235 in ProgramPage = technoTribeProgniq
+2025-02-28 14:26:27.363 INFO [main] [pageObjects.ProgramPage.editTheProgramAndClickSave(ProgramPage.java:233)] - Program name to update from excel >>editprogtest
+2025-02-28 14:26:32.912 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Toast Message >>Successful
+2025-02-28 14:26:34.032 INFO [main] [pageObjects.ProgramPage.verifyUpdatedProgramDetails(ProgramPage.java:450)] - Search result Name >>editprogtestfad
+2025-02-28 14:26:34.032 INFO [main] [pageObjects.ProgramPage.verifyUpdatedProgramDetails(ProgramPage.java:451)] - Search result Desc >>Advanced level Java
+2025-02-28 14:26:34.032 INFO [main] [pageObjects.ProgramPage.verifyUpdatedProgramDetails(ProgramPage.java:452)] - Search result validation passed: 
+2025-02-28 14:26:34.033 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 14:26:34.033 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 14:26:41.536 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 14:26:41.537 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 14:27:21.776 INFO [main] [utilities.Log.logInfo(Log.java:13)] - ProgramName at run time received in line 193 in EditProgramPage = editprogtestfad
+2025-02-28 14:27:24.828 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Option Section is visible
+2025-02-28 14:27:24.880 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Option is found
+2025-02-28 14:27:41.713 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Batch created successfully - Successful
+2025-02-28 14:27:41.714 INFO [main] [utilities.Log.logInfo(Log.java:13)] - BatchName_Mandatory: editprogtestfad128
+2025-02-28 14:27:42.057 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Batch created successfully
+2025-02-28 14:27:42.059 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 14:27:42.059 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 14:27:48.409 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 14:27:48.410 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 14:28:27.663 INFO [main] [utilities.Log.logInfo(Log.java:13)] - ProgramName at run time received in line 193 in EditProgramPage = editprogtestfad
+2025-02-28 14:28:30.717 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Option Section is visible
+2025-02-28 14:28:30.768 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Option is found
+2025-02-28 14:28:46.858 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Batch created successfully - chaining
+2025-02-28 14:28:46.859 INFO [main] [utilities.Log.logInfo(Log.java:13)] - BatchName_All: editprogtestfad59
+2025-02-28 14:28:47.363 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Batch created successfully
+2025-02-28 14:28:47.363 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 14:28:47.364 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 14:28:53.887 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 14:28:53.888 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 14:29:28.950 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Batch name is: editprogtestfad59
+2025-02-28 14:29:29.927 INFO [main] [utilities.Log.logInfo(Log.java:13)] - search text is: editprogtestfad59
+2025-02-28 14:29:29.983 INFO [main] [utilities.Log.logInfo(Log.java:13)] - StaleElementReferenceException encountered. Retrying... 1
+2025-02-28 14:29:30.398 INFO [main] [utilities.Log.logInfo(Log.java:13)] - search text is: editprogtestfad59
+2025-02-28 14:29:30.398 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 14:29:30.398 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 14:29:37.849 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 14:29:37.850 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 14:29:53.098 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigated to home page 
+2025-02-28 14:30:11.969 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 14:30:12.539 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 14:30:20.001 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 14:30:20.002 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 14:30:57.726 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Batch name is: editprogtestfad59
+2025-02-28 14:31:20.450 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Batch name is: editprogtestfad128
+2025-02-28 14:31:42.949 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 14:31:42.950 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 14:31:49.722 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 14:31:49.722 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 14:32:25.460 INFO [main] [pageObjects.ProgramPage.clickDeleteProgramBtn(ProgramPage.java:297)] - Program to be deleted >>>editprogtestfad
+2025-02-28 14:32:28.418 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Toast Message >>Successful
+2025-02-28 14:32:28.418 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 14:32:28.418 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver
+2025-02-28 14:32:35.962 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Initializing WebDriver
+2025-02-28 14:32:35.962 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Navigating to: https://feb-ui-hackathon-bbfd38d67ea9.herokuapp.com/
+2025-02-28 14:33:08.622 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Screenshots for failed
+2025-02-28 14:33:08.623 INFO [main] [utilities.Log.logInfo(Log.java:13)] - Closing WebDriver

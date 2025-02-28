@@ -2,6 +2,11 @@ package hooks;
 
 import org.openqa.selenium.WebDriver;
 
+import pageObjects.BatchPage;
+import pageObjects.CommonPage;
+import pageObjects.HomePage;
+import pageObjects.LoginPage;
+import pageObjects.ProgramPage;
 import utilities.DriverFactory;
 import utilities.ReadConfig;
 import utilities.RunTimeData;
@@ -11,12 +16,21 @@ public class TestContext {
 	private ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
 	private DriverFactory driverFactory;
 	private ReadConfig readConfig;
+	   private LoginPage loginPage;
+	    private BatchPage batchPage;
+	    private ProgramPage programPage;
+	    private HomePage homePage;
+	    private CommonPage commonPage;
 
 	// Constructor initializes dependencies
 	public TestContext() {
 		this.driverFactory = new DriverFactory();
 		this.readConfig = new ReadConfig();
-
+		 this.loginPage = new LoginPage(this);  // Pass TestContext to pages
+	        this.batchPage = new BatchPage(this);
+	        this.homePage = new HomePage(this);
+	        this.commonPage = new CommonPage(this);
+	        this.programPage = new ProgramPage(this);
 	}
 
 	public void setDriver(WebDriver driver) {
@@ -37,6 +51,26 @@ public class TestContext {
 	        return driver; // Retrieves WebDriver specific to the current thread
 	    }
 	  
+	  // Method to access the page objects
+	    public LoginPage getLoginPage() {
+	        return loginPage;
+	    }
+
+	    public BatchPage getBatchPage() {
+	        return batchPage;
+	    }
+	    public ProgramPage getProgramPage() {
+	        return programPage;
+	    }
+
+	    public HomePage getHomePage() {
+	        return homePage;
+	    }
+
+	    public CommonPage getCommonPage() {
+	        return commonPage;
+	    }
+	    
 	public DriverFactory getDriverFactory() {
 		return driverFactory;
 	}
