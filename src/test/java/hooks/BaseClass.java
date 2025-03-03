@@ -6,6 +6,8 @@ import java.io.IOException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import io.cucumber.java.After;
 import io.cucumber.java.AfterAll;
@@ -52,7 +54,7 @@ public class BaseClass {
 
 	        // Retrieve headless value from TestNG parameters or default config
 	        String isHeadless = readConfig.getHeadlessfromTestNG() != null ? 
-                    readConfig.getHeadlessfromTestNG() : readConfig.getHeadlessOption();
+                 readConfig.getHeadlessfromTestNG() : readConfig.getHeadlessOption();
 	        		
 
 	        // Debug: Log the headless value

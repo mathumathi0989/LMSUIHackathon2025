@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import hooks.TestContext;
+import utilities.CommonPage;
 import utilities.ElementUtil;
 import utilities.Log;
 

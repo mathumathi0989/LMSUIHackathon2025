@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import hooks.TestContext;
+import utilities.CommonPage;
 import utilities.ElementUtil;
 import utilities.Log;
 import utilities.RunTimeData;

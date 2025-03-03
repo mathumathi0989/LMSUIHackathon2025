@@ -3,7 +3,6 @@ package stepDefinitions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.testng.Assert;
 
@@ -11,10 +10,6 @@ import hooks.TestContext;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pageObjects.BatchPage;
-import pageObjects.CommonPage;
-import pageObjects.HomePage;
-import pageObjects.LoginPage;
 import utilities.Log;
 import utilities.ReadConfig;
 import utilities.RunTimeData;
@@ -108,9 +103,13 @@ public class BatchStepDef {
 	@Then("Admin should see selected program name in the batch name prefix box")
 	public void admin_should_see_selected_program_name_in_the_batch_name_prefix_box() {
 
-		String batchName = (String) RunTimeData.getData("BatchNameAll"); 
+		String batchName = (String) RunTimeData.getData("BatchName_All"); 
 		if (batchName!=null) {
-			Assert.assertEquals(batchName, context.getBatchPage().getBatchNamePrefix()); } else { 
+			System.out.println("BatchNameAll: " + context.getBatchPage().getProgramName());
+			System.out.println("BatchNamePrefix: " + context.getBatchPage().getBatchNamePrefix());
+			Assert.assertEquals(context.getBatchPage().getProgramName(), context.getBatchPage().getBatchNamePrefix()); } 
+		
+		else { 
 			Assert.fail("BatchName_All is not present in RunTimeData");
 		}
 	}
@@ -244,16 +243,19 @@ public class BatchStepDef {
 	}
 
 	@When("Admin edit the valid data to all the mandatory fields and click save button")
-	public void admin_edit_the_valid_data_to_all_the_mandatory_fields_and_click_save_button() {
-		   String batchName = (String) RunTimeData.getData("BatchName_All");
-		    if (batchName!=null) {
-		        context.getBatchPage().enterSearch(batchName);
+	public void admin_edit_the_valid_data_to_all_the_mandatory_fields_and_click_save_button() throws Exception {
+		   String batchEditName = (String) RunTimeData.getData("BatchName_All");
+		    if (batchEditName!=null) {
+		        context.getBatchPage().enterSearch(batchEditName);
 		        context.getBatchPage().clickAction("edit");
 		        context.getBatchPage().editAllDetails("Save", "editAll");
 		    } else {
 		        Assert.fail("BatchName_All is not present in RunTimeData");
 		    }
 	}
+	
+
+
 
 	@Then("Admin should get a successful message for editing the batch")
 	public void admin_should_get_a_successful_message_for_editing_the_batch() {
@@ -347,7 +349,7 @@ public class BatchStepDef {
 	}
 
 	@When("Admin enters the batch name in the search text box and edit the valid data and click save button")
-	public void admin_enters_the_batch_name_in_the_search_text_box_and_edit_the_valid_data_and_click_save_button() {
+	public void admin_enters_the_batch_name_in_the_search_text_box_and_edit_the_valid_data_and_click_save_button() throws Exception {
 		String batchName = (String) RunTimeData.getData("BatchName_Mandatory"); 
 		if (batchName !=null) { 
 			context.getBatchPage().enterSearch(batchName); 
@@ -357,7 +359,7 @@ public class BatchStepDef {
 	}
 
 	@When("Admin enters the batch name in the search text box")
-	public void admin_enters_the_batch_name_in_the_search_text_box() {
+	public void admin_enters_the_batch_name_in_the_search_text_box() throws Exception {
 		String StoredbatchName = (String) RunTimeData.getData("BatchName_All"); 
 		System.out.println("BatchNameAll in search: " + StoredbatchName);
 		if (StoredbatchName!=null) { 

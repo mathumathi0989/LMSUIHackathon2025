@@ -3,7 +3,6 @@ package stepDefinitions;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -12,10 +11,6 @@ import hooks.TestContext;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pageObjects.CommonPage;
-import pageObjects.HomePage;
-import pageObjects.LoginPage;
-import pageObjects.ProgramPage;
 import utilities.Log;
 import utilities.ReadConfig;
 import utilities.RunTimeData;

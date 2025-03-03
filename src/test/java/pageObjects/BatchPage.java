@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import hooks.TestContext;
+import utilities.CommonPage;
 import utilities.ElementUtil;
 import utilities.ExcelReader;
 import utilities.Log;
@@ -74,6 +75,7 @@ public class BatchPage extends CommonPage {
 	private By nextPaginatorBtn = By.xpath("//button[contains(@class,'p-paginator-next')]");
 	private By lastPaginatorBtn = By.xpath("//button[contains(@class,'p-paginator-last')]");
 
+	private By overlay = By.cssSelector(".cdk-overlay-backdrop");
 	public static String BatchName;
 	public static String BatchName1;
 	private String sheetName = "Batch";
@@ -83,6 +85,7 @@ public class BatchPage extends CommonPage {
 		super(context); // Pass WebDriver to parent class
         this.context = context;
         this.util = new ElementUtil(context.getDriver());
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         this.readConfig = new ReadConfig();
 	}
 
@@ -125,6 +128,7 @@ public class BatchPage extends CommonPage {
 	public void closeButtonClick() {
 		util.doClick(closeButton);
 	}
+
 
 	public Boolean deleteBatchHeaderButton() {
 		return util.isElementEnabled(deleteBatchHeader);
@@ -247,11 +251,18 @@ public class BatchPage extends CommonPage {
 		return driver.findElement(addBatchFirstName).getDomProperty("value");
 	}
 
+	public String getProgramName() {
+		return driver.findElement(programNameLocator).getDomProperty("value");
+	}
+	
 	public void getActiveStatusRadioButton() {
 		WebElement activeStatusElement = driver.findElement(activeStatus);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", activeStatusElement);
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("cdk-overlay-backdrop")));
+		try {
+			isElementIntercepted();
+		} catch (Exception e) {
+			System.out.println("Exception occured");
+		}
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", activeStatusElement);
 	}
 
@@ -333,7 +344,7 @@ public class BatchPage extends CommonPage {
 		                    System.out.println("Batch chaining saved in runtime data " +finalBatchName);
 		                   System.out.println("Getting Batch Chaining data " + RunTimeData.getData("BatchName_All"));
 					} else {
-
+						
 						Log.logInfo("Batch created successfully - " + toastMessage);
 						String finalBatchName1 = (String)RunTimeData.getData("programNameEdit")+newBatchName;
 		                    Log.logInfo("BatchName_Mandatory: " + finalBatchName1);
@@ -374,16 +385,25 @@ public class BatchPage extends CommonPage {
 		}
 	}
 
+	public void commonWaitVisibility(By element, int duration) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(element)));
+    }
+
+	public void commonWaitElementLocated(By element, int duration) {
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(duration));
+	    wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+	}
+	
 	public String getErrorMessage() {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(invalidError)));
+		commonWaitVisibility(invalidError, 10);
 		String err = driver.findElement(invalidError).getText();
 		return err;
 	}
 
 	public void clickAction(String actionType) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".cdk-overlay-backdrop")));
+		isElementIntercepted();
+		
 		WebElement actionIcon = null;
 		if (actionType.equalsIgnoreCase("edit")) {
 			actionIcon = wait
@@ -421,9 +441,7 @@ public class BatchPage extends CommonPage {
 			driver.findElement(addBatchNoOfClasses).clear();
 			driver.findElement(addBatchNoOfClasses).sendKeys(newNoOfClasses);
 		}
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".cdk-overlay-backdrop")));
-
+		commonWaitElementLocated(overlay, 10);
 		if (saveCancel.equalsIgnoreCase("Save")) {
 			// Wait for the overlay to disappear before clicking Save
 			WebElement saveBtn = driver.findElement(saveButton);
@@ -449,8 +467,7 @@ public class BatchPage extends CommonPage {
 	}
 
 	public void clickDelete() {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".cdk-overlay-backdrop")));
+	commonWaitElementLocated(overlay, 10);
 		WebElement deleteIcon = wait.until(ExpectedConditions
 				.elementToBeClickable(By.xpath("//div[@class='action']//button[@icon='pi pi-trash']")));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", deleteIcon);
@@ -472,9 +489,14 @@ public class BatchPage extends CommonPage {
 
 	public void isElementIntercepted() {
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		try {
 		WebElement overlay = driver.findElement(By.className("cdk-overlay-backdrop"));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("cdk-overlay-backdrop")));
 		overlay.click();
+		}
+		catch (Exception e) {
+			System.out.println("Element not intercepted");
+		}
 	}
 
 	public void clickOnNextPage() {
@@ -546,14 +568,16 @@ public class BatchPage extends CommonPage {
 		return BatchName1;
 	}
 
-	public void enterSearch(String search) {
+	public void enterSearch(String search) throws Exception {
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("document.elementFromPoint(0, 0).click();");
 		WebElement Searchtext = wait.until(ExpectedConditions.presenceOfElementLocated(searchBox));
 		util.doClick(Searchtext);
 		System.out.println("Clicked on search box");
+		
 		Searchtext.clear();
+		
 		Log.logInfo("Batch name is: " + search);
 		Searchtext.sendKeys(search);
 		System.out.println("Entered search text");
@@ -561,10 +585,9 @@ public class BatchPage extends CommonPage {
 
 	public boolean validateSearch() {
 		boolean flag = false;
-		WebElement dataTable = driver
-				.findElement(By.xpath("//div[@class='p-d-flex p-ai-center p-jc-between ng-star-inserted']"));
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.visibilityOf(dataTable));
+		By dataTable = (By.xpath("//div[@class='p-d-flex p-ai-center p-jc-between ng-star-inserted']"));
+		commonWaitVisibility(dataTable, 10);
+		
 		int retryCount = 0;
 		while (retryCount < 3) {
 			try {

@@ -1,6 +1,6 @@
 #Author: Mathumathi Balakrishnan
 
-@batch 
+@batch @smoke
 Feature: Batch Page
 
 Background:
@@ -79,11 +79,6 @@ Scenario: Validate all the fields exist in pop up
 	Given Admin is on the Batch Details Pop Up WIndow
 	Then The pop up should include the fields Batch Name,Number of classes and Description as text box,Program Name as drop down Status as radio button
 
-@TCB14 @addBatchPageValidation 
-Scenario: Validate batchname prefix selected program name
-	Given Admin is on the Batch Details Pop Up WIndow
-	When Admin selects program name present in the dropdown
-	Then Admin should see selected program name in the batch name prefix box
 
 @TCB15 @addBatchPageValidation
 Scenario Outline: Validate batch name suffix box should accept only numbers
@@ -129,6 +124,12 @@ Scenario: validate save button in Batch details pop up
 	When Admin enters the valid data to all the fields and click save button 
 	Then Admin should get a successful message
 
+@TCB14 @addBatchPageValidation 
+Scenario: Validate batchname prefix selected program name
+	Given Admin is on the Batch Details Pop Up WIndow
+	When Admin selects program name present in the dropdown
+	Then Admin should see selected program name in the batch name prefix box
+	
 @TCB20 @addBatchPageValidation
 Scenario: validate cancel button in Batch details pop up
 	Given Admin is on the Batch Details Pop Up WIndow

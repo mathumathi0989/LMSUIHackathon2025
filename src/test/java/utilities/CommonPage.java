@@ -1,4 +1,4 @@
-package pageObjects;
+package utilities;
 
 import java.time.Duration;
 import java.util.List;
@@ -13,8 +13,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import hooks.TestContext;
-import utilities.ElementUtil;
-import utilities.Log;
+import pageObjects.BatchPage;
+import pageObjects.ClassPage;
+import pageObjects.LoginPage;
+import pageObjects.ProgramPage;
 
 public class CommonPage {
 	  private TestContext context;

@@ -3,10 +3,10 @@ package hooks;
 import org.openqa.selenium.WebDriver;
 
 import pageObjects.BatchPage;
-import pageObjects.CommonPage;
 import pageObjects.HomePage;
 import pageObjects.LoginPage;
 import pageObjects.ProgramPage;
+import utilities.CommonPage;
 import utilities.DriverFactory;
 import utilities.ReadConfig;
 import utilities.RunTimeData;
@@ -76,11 +76,16 @@ public class TestContext {
 	}
 
 	public void closeDriver() {
-		if (driverThreadLocal.get() != null) {
-			driverFactory.closeDriver();
-			  driverThreadLocal.get().quit();
-			driverThreadLocal.remove(); // Ensures WebDriver is removed when test is done
-		}
+//		if (driverThreadLocal.get() != null) {
+//			driverFactory.closeDriver();
+//			  driverThreadLocal.get().quit();
+//			driverThreadLocal.remove(); // Ensures WebDriver is removed when test is done
+//		}
+		 WebDriver driver = driverThreadLocal.get();
+	        if (driver != null) {
+	            driver.quit();
+	            driverThreadLocal.remove();
+	        }
 	}
 
 	public String getApplicationURL() {
